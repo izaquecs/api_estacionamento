@@ -3,6 +3,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AcessosModule } from './acessos/acessos.module';
 import { EstabelecimentosModule } from './estabelecimentos/estabelecimentos.module';
 import { VeiculosModule } from './veiculos/veiculos.module';
+import { PassportModule } from '@nestjs/passport';
 import { JwtModule } from '@nestjs/jwt';
 import { AuthService } from './auth/auth.service';
 import { JwtStrategy } from './auth/jwt-strategy';
@@ -33,6 +34,7 @@ console.log(process.env.DB_HOST)
       secret: process.env.JWT_KEY, 
       signOptions: { expiresIn: '1d' },
     }),
+    PassportModule.register({ defaultStrategy: 'jwt' }),
   ],
   controllers: [],
   providers: [AuthService, JwtStrategy],
